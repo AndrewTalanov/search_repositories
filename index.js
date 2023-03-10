@@ -4,16 +4,21 @@ function draw(array) {
 
     let linksHTML = '';
 
-    array.forEach(el => {
-        linksHTML += `<div class="list-element">
-                        <img src="${el.owner.avatar_url}" alt="Аватар аккаунта">
-                        <div class="element-info">
-                            <p>Ссылка на репозиторий: <a href=${el.html_url} target="_blank">${el.name}</a></p>
-                            <p>Имя аккаунта: ${el.owner.login}</p>
-                            <p>Используемый язык: ${el.language ?? 'Не используется'}</p>
-                        </div>
-                    </div>`;
-    });
+    if (array.length) {
+        array.forEach(el => {
+            linksHTML += `<div class="list-element">
+                            <img src="${el.owner.avatar_url}" alt="Аватар аккаунта">
+                            <div class="element-info">
+                                <p>Ссылка на репозиторий: <a href=${el.html_url} target="_blank">${el.name}</a></p>
+                                <p>Имя аккаунта: ${el.owner.login}</p>
+                                <p>Используемый язык: ${el.language ?? 'Не используется'}</p>
+                            </div>
+                        </div>`;
+        });
+    } else {
+        linksHTML = '<p class="list-empty">Ничего не найдено<p>';
+    }
+
     document.querySelector('.message').innerHTML = '';
     list.innerHTML = linksHTML;
 }
